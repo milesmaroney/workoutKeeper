@@ -1,11 +1,9 @@
 import React from 'react';
-import { IoIosMenu } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp, IoIosMenu } from 'react-icons/io';
 import useClickOutside from './useClickOutside';
 import Logo from './assets/workoutKeeperSmall.png';
 
 function Header(props) {
-  const greetings = ['Welcome', 'Hey', 'Hello', 'Lets Get It', 'Stay Hard'];
-
   const [showLogout, setShowLogout] = React.useState(false);
 
   const logout = React.useRef();
@@ -29,13 +27,13 @@ function Header(props) {
         }`}
         onClick={() => setShowLogout((x) => !x)}
       >
-        <div className='hover:text-rose-600 transition-all duration-300'>
-          {greetings[Math.floor(Math.random() * greetings.length)]},{' '}
+        <div className='flex hover:text-rose-600 transition-all duration-300 items-center gap-2 hover:bg-neutral-800 border border-neutral-600 rounded px-2 py-1'>
           {props.user.username}
+          {showLogout ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </div>
         {showLogout && (
           <div
-            className='absolute right-0 top-7 px-4 py-1 rounded hover:text-rose-600 bg-neutral-600 z-10'
+            className='absolute right-0 top-8 px-4 py-1 rounded hover:text-rose-600 bg-neutral-600 z-10'
             ref={logout}
             onClick={() => props.setUser({})}
           >
