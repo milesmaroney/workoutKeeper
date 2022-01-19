@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
+const defaultExercises = require('./defaultExercises');
 
 mongoose.connect('mongodb://localhost/workoutlog', (err) => {
   if (err) {
@@ -9,28 +10,10 @@ mongoose.connect('mongodb://localhost/workoutlog', (err) => {
   console.log('DB Connected');
 });
 
-const testExercises = [
-  {
-    name: 'Row Machine',
-    type: 'Duration',
-    quantity: '120',
-    difficulty: 'Intermediate',
-    category: 'Full Body',
-  },
-  {
-    name: 'Push Ups',
-    type: 'Reps',
-    quantity: '20',
-    difficulty: 'Intermediate',
-    category: 'Chest',
-  },
-];
-
 const exerciseSchema = new mongoose.Schema({
   name: String,
   type: String,
   quantity: String,
-  difficulty: String,
   category: String,
 });
 
@@ -38,16 +21,15 @@ const workoutSchema = new mongoose.Schema({
   name: String,
   favorite: { type: Boolean, default: false },
   category: String,
-  difficulty: String,
   duration: Number,
-  exercises: { type: [exerciseSchema], default: testExercises },
+  exercises: [exerciseSchema],
 });
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, require: true },
   workouts: [workoutSchema],
-  exercises: { type: [exerciseSchema], default: testExercises },
+  exercises: { type: [exerciseSchema], default: defaultExercises },
 });
 
 userSchema.pre('save', function (next) {

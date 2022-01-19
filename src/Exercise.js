@@ -9,7 +9,6 @@ function Exercise(props) {
   const [name, setName] = React.useState(props.exercise.name);
   const [type, setType] = React.useState(props.exercise.type);
   const [quantity, setQuantity] = React.useState(props.exercise.quantity);
-  const [difficulty, setDifficulty] = React.useState(props.exercise.difficulty);
   const [category, setCategory] = React.useState(props.exercise.category);
 
   function handleSubmit() {
@@ -19,7 +18,6 @@ function Exercise(props) {
         name,
         type,
         quantity,
-        difficulty,
         category,
       })
       .then((res) => {
@@ -94,15 +92,6 @@ function Exercise(props) {
               type === 'Rep Count' ? 'Default Quantity' : 'Default Time'
             }
           />
-          <select
-            className='rounded input'
-            onChange={(e) => setDifficulty(e.target.value)}
-            value={difficulty}
-          >
-            <option>Beginner</option>
-            <option>Intermediate</option>
-            <option>Advanced</option>
-          </select>
           <select
             className='rounded input'
             onChange={(e) => setCategory(e.target.value)}

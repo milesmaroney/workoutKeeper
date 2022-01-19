@@ -20,7 +20,6 @@ function WorkoutDetail(props) {
   );
   const [favorite, setFavorite] = React.useState(workout.favorite);
   const [duration, setDuration] = React.useState(workout.duration);
-  const [difficulty, setDifficulty] = React.useState(workout.difficulty);
   const [category, setCategory] = React.useState(workout.category);
   const [toggleEdit, setToggleEdit] = React.useState(false);
 
@@ -78,15 +77,13 @@ function WorkoutDetail(props) {
   }, [workoutExercises]);
 
   function handleAdd() {
-    flushSync(() => {
-      setWorkoutExercises((x) => [
-        ...x,
-        {
-          ...props.exercises[exerciseNames.indexOf(newExerciseName)],
-          quantity: newExerciseQuantity,
-        },
-      ]);
-    });
+    setWorkoutExercises((x) => [
+      ...x,
+      {
+        ...props.exercises[exerciseNames.indexOf(newExerciseName)],
+        quantity: newExerciseQuantity,
+      },
+    ]);
     setNewExerciseQuantity('');
   }
 
@@ -114,7 +111,6 @@ function WorkoutDetail(props) {
         name: name,
         favorite: favorite,
         duration: duration,
-        difficulty: difficulty,
         category: category,
         exercises: workoutExercises,
       })
@@ -216,7 +212,7 @@ function WorkoutDetail(props) {
             <div className='font-bold'>
               {props.exercises[exerciseNames.indexOf(newExerciseName)].type ===
               'Rep Count'
-                ? 'Reps'
+                ? 'Reps / Sets'
                 : 'Time in Seconds'}
             </div>
             <input

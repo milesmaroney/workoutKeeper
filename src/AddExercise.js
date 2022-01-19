@@ -5,7 +5,6 @@ function AddExercise(props) {
   const [name, setName] = React.useState('');
   const [type, setType] = React.useState('Rep Count');
   const [quantity, setQuantity] = React.useState('');
-  const [difficulty, setDifficulty] = React.useState('Beginner');
   const [category, setCategory] = React.useState('Arms');
 
   function handleSubmit() {
@@ -17,7 +16,6 @@ function AddExercise(props) {
             name,
             type,
             quantity,
-            difficulty,
             category,
           }
         )
@@ -25,7 +23,6 @@ function AddExercise(props) {
           setName('');
           setType('Rep Count');
           setQuantity('');
-          setDifficulty('Beginner');
           setCategory('Arms');
           props.setShowAdd(false);
           props.refreshUser();
@@ -61,15 +58,6 @@ function AddExercise(props) {
         placeholder={type === 'Rep Count' ? 'Default Quantity' : 'Default Time'}
       />
       <select
-        onChange={(e) => setDifficulty(e.target.value)}
-        value={difficulty}
-        className='input'
-      >
-        <option>Beginner</option>
-        <option>Intermediate</option>
-        <option>Advanced</option>
-      </select>
-      <select
         onChange={(e) => setCategory(e.target.value)}
         value={category}
         className='input'
@@ -78,6 +66,7 @@ function AddExercise(props) {
         <option>Back</option>
         <option>Chest</option>
         <option>Core</option>
+        <option>Full Body</option>
         <option>Legs</option>
         <option>Shoulders</option>
       </select>

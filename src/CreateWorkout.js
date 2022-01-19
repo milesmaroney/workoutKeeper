@@ -7,7 +7,6 @@ import CreateWorkoutExercise from './CreateWorkoutExercise';
 
 function CreateWorkout(props) {
   const [name, setName] = React.useState('');
-  const [difficulty, setDifficulty] = React.useState('Intermediate');
   const [duration, setDuration] = React.useState();
   const [exercises, setExercises] = React.useState([]);
 
@@ -72,7 +71,6 @@ function CreateWorkout(props) {
         name,
         exercises,
         duration,
-        difficulty,
         category: category === 'addNew' ? newCategory : category,
       })
       .then((res) => {
@@ -114,18 +112,6 @@ function CreateWorkout(props) {
               value={category}
             >
               {categories}
-            </select>
-          </div>
-          <div className='flex flex-col w-1/3'>
-            <div className='font-bold'>Difficulty</div>
-            <select
-              className='w-full input indent-1'
-              onChange={(e) => setDifficulty(e.target.value)}
-              value={difficulty}
-            >
-              <option>Beginner</option>
-              <option>Intermediate</option>
-              <option>Advanced</option>
             </select>
           </div>
           <div className='flex flex-col w-1/3'>

@@ -73,7 +73,6 @@ function LeftBar(props) {
       >
         {showAdd ? 'Cancel' : 'Add New Exercise'}
       </button>
-      {/* <div className='mt-auto text-center h-10 min-h-max w-full shadow hover:shadow-black sticky bottom-0 z-10 cursor-pointer'></div> */}
       {showAdd && (
         <AddExercise
           user={props.user}
