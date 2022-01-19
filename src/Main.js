@@ -59,7 +59,7 @@ function Main(props) {
 
   return (
     <div className='h-screen overflow-y-scroll' onClick={props.drawerClick}>
-      <div className='flex justify-center items-center h-16 gap-3 md:gap-4 text-xs md:text-base'>
+      <div className='flex justify-center items-center px-2 md:px-0 h-16 gap-2 md:gap-4 text-xs md:text-base'>
         <button
           onClick={() => setFavorites((x) => !x)}
           value={favorites}

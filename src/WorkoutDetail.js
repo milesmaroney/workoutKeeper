@@ -194,7 +194,7 @@ function WorkoutDetail(props) {
         </Link>
       </div>
       {toggleEdit && (
-        <div className='flex gap-4 pt-2 px-4 pb-8 justify-between items-center'>
+        <div className='flex gap-4 pt-2 px-4 pb-8 justify-between items-center text-sm md:text-base'>
           <div className='flex flex-col w-1/3'>
             <div className='font-bold'>Add Exercise</div>
             <select

@@ -13,7 +13,15 @@ function Login(props) {
   const [showError, setShowError] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState('');
 
+  const validation = '^[a-zA-Z0-9_]*$';
+  const passValidation = '^([1-zA-Z0-1@.\\s])$';
+
   function handleLogin() {
+    if (!username.match(validation) || !password.match(passValidation)) {
+      setErrorMessage('Invalid Fields');
+      handlePopup();
+      return;
+    }
     if (!username || !password) {
       setErrorMessage('Complete All Fields');
       handlePopup();
@@ -41,6 +49,15 @@ function Login(props) {
   }
 
   function handleSignup() {
+    if (
+      !newUsername.match(validation) ||
+      !newPassword.match(passValidation) ||
+      !confirmNewPassword.match(passValidation)
+    ) {
+      setErrorMessage('Invalid Fields');
+      handlePopup();
+      return;
+    }
     if (!newUsername || !newPassword || !confirmNewPassword) {
       setErrorMessage('Complete All Fields');
       handlePopup();
