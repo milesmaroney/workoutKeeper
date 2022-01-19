@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 const defaultExercises = require('./defaultExercises');
+const Options = require('./config.js');
 
-mongoose.connect('mongodb://localhost/workoutlog', (err) => {
+mongoose.connect(Options.mongoURI, (err) => {
   if (err) {
     throw err;
   }
