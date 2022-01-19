@@ -34,11 +34,9 @@ function WorkoutExercise(props) {
           : `${props.exercise.quantity}s`}
       </div>
       {showEdit && (
-        <div className='flex ml-2 items-end'>
+        <div className='flex ml-2 items-center'>
           <MdKeyboardArrowRight />
           <input
-            type='number'
-            min='1'
             className='input rounded indent-1 ml-2 w-1/2'
             value={editQuantity}
             onChange={(e) => setEditQuantity(e.target.value)}

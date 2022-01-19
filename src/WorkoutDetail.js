@@ -160,7 +160,9 @@ function WorkoutDetail(props) {
             <MdKeyboardArrowLeft size='25px' /> Back
           </button>
         </Link>
-        <div className='pt-2 mx-auto text-2xl'>{workout.name}</div>
+        <div className='pt-3 md:pt-2 mx-auto text-lg md:text-2xl'>
+          {workout.name}
+        </div>
       </div>
       <div className='flex justify-center items-center h-16 gap-3 md:gap-4 text-xs md:text-base'>
         <button

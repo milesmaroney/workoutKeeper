@@ -27,6 +27,16 @@ function CreateWorkout(props) {
     return 0;
   }
 
+  function compareName(a, b) {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  }
+
   const categoryNames = [
     ...new Set(props.workouts.sort(compare).map((workout) => workout.category)),
   ];
@@ -42,11 +52,11 @@ function CreateWorkout(props) {
     </option>,
   ];
 
-  const exerciseOptions = props.exercises.map((x) => (
-    <option key={x._id}>{x.name}</option>
-  ));
+  const exerciseOptions = props.exercises
+    .sort(compareName)
+    .map((x) => <option key={x._id}>{x.name}</option>);
 
-  const [category, setCategory] = React.useState(categoryNames[0]);
+  const [category, setCategory] = React.useState(categoryNames[0] || 'addNew');
   const [newCategory, setNewCategory] = React.useState('');
 
   function handleAdd() {
@@ -95,15 +105,15 @@ function CreateWorkout(props) {
         <div className='pt-2 mx-auto text-2xl'>New Workout</div>
       </div>
       <div className='flex flex-col px-2 md:px-8 text-sm md:text-base'>
-        <div className=''>
-          <div className='font-bold'>Workout Name</div>
-          <input
-            className='w-full input indent-1'
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-          />
-        </div>
         <div className='flex w-full justify-between gap-4 pt-2'>
+          <div className='flex flex-col w-1/3'>
+            <div className='font-bold'>Workout Name</div>
+            <input
+              className='w-full input indent-1'
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />
+          </div>
           <div className='flex flex-col w-1/3'>
             <div className='font-bold'>Category</div>
             <select
@@ -151,7 +161,7 @@ function CreateWorkout(props) {
             <div className='font-bold'>
               {props.exercises[exerciseNames.indexOf(newExerciseName)].type ===
               'Rep Count'
-                ? 'Reps / Sets'
+                ? 'Sets x Reps'
                 : 'Time in Seconds'}
             </div>
             <input

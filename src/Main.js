@@ -96,6 +96,9 @@ function Main(props) {
           </button>
         </Link>
       </div>
+      {!workouts.length && (
+        <div className='text-center'>No workouts yet... Create some!</div>
+      )}
       {workouts}
     </div>
   );
