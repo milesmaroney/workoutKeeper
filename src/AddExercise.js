@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import config from './config';
 
 function AddExercise(props) {
   const [name, setName] = React.useState('');
@@ -10,15 +11,12 @@ function AddExercise(props) {
   function handleSubmit() {
     if (name) {
       axios
-        .post(
-          `http://localhost:3001/api/${props.user.username}/createExercise`,
-          {
-            name,
-            type,
-            quantity,
-            category,
-          }
-        )
+        .post(`${config.server}/api/${props.user.username}/createExercise`, {
+          name,
+          type,
+          quantity,
+          category,
+        })
         .then(() => {
           setName('');
           setType('Rep Count');

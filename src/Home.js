@@ -6,6 +6,7 @@ import Main from './Main';
 import { Route, Routes } from 'react-router-dom';
 import CreateWorkout from './CreateWorkout';
 import WorkoutDetail from './WorkoutDetail';
+import config from './config';
 
 function Home(props) {
   const [workouts, setWorkouts] = React.useState(props.user?.workouts);
@@ -21,7 +22,7 @@ function Home(props) {
 
   function refreshUser() {
     axios
-      .get(`http://localhost:3001/api/${props.user.username}`)
+      .get(`${config.server}/api/${props.user.username}`)
       .then(({ data }) => {
         props.setUser({
           _id: data._id,

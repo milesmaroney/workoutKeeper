@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from 'react-icons/md';
+import config from './config';
 
 function Exercise(props) {
   const [hovered, setHovered] = React.useState(false);
@@ -13,7 +14,7 @@ function Exercise(props) {
 
   function handleSubmit() {
     axios
-      .put(`http://localhost:3001/api/${props.user.username}/updateExercise`, {
+      .put(`${config.server}/api/${props.user.username}/updateExercise`, {
         _id: props.exercise._id,
         name,
         type,
@@ -29,14 +30,11 @@ function Exercise(props) {
 
   function handleDelete() {
     axios
-      .delete(
-        `http://localhost:3001/api/${props.user.username}/deleteExercise`,
-        {
-          data: {
-            _id: props.exercise._id,
-          },
-        }
-      )
+      .delete(`${config.server}/api/${props.user.username}/deleteExercise`, {
+        data: {
+          _id: props.exercise._id,
+        },
+      })
       .then((res) => {
         setShowEdit(false);
         props.refreshUser();

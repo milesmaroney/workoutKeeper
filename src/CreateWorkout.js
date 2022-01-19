@@ -3,11 +3,12 @@ import React from 'react';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
+import config from './config';
 import CreateWorkoutExercise from './CreateWorkoutExercise';
 
 function CreateWorkout(props) {
   const [name, setName] = React.useState('');
-  const [duration, setDuration] = React.useState();
+  const [duration, setDuration] = React.useState(60);
   const [exercises, setExercises] = React.useState([]);
 
   const exerciseNames = props.exercises.map((x) => x.name);
@@ -77,7 +78,7 @@ function CreateWorkout(props) {
 
   function handleSubmit() {
     axios
-      .post(`http://localhost:3001/api/${props.user.username}/createWorkout`, {
+      .post(`${config.server}/api/${props.user.username}/createWorkout`, {
         name,
         exercises,
         duration,
@@ -211,7 +212,7 @@ function CreateWorkout(props) {
           disabled={
             !exercises.length ||
             !name ||
-            !duration ||
+            duration < 1 ||
             (category === 'addNew' && !newCategory)
           }
           style={{

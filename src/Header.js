@@ -1,6 +1,7 @@
 import React from 'react';
 import { IoIosMenu } from 'react-icons/io';
 import useClickOutside from './useClickOutside';
+import Logo from './assets/workoutKeeperSmall.png';
 
 function Header(props) {
   const greetings = ['Welcome', 'Hey', 'Hello', 'Lets Get It', 'Stay Hard'];
@@ -19,7 +20,9 @@ function Header(props) {
       >
         <IoIosMenu size='30px' />
       </div>
-      <div className='pl-4'>workoutKeeper</div>
+      <div className='pl-4'>
+        <img src={Logo} alt='workoutKeeper' width='150px' />
+      </div>
       <div
         className={`relative ml-auto text-sm cursor-pointer font-semibold transition-all duration-300 ${
           props.hide ? '' : 'hidden md:flex'
