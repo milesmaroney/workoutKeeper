@@ -88,10 +88,10 @@ function CreateWorkout(props) {
       <div className='flex h-16 relative'>
         <Link to='..'>
           <button
-            className='flex items-center rounded py-1 pr-3 absolute top-2 left-2 font-bold text-xl'
+            className='flex items-center rounded md:py-1 pr-3 absolute top-3 md:top-2 left-2 font-bold text-xl'
             style={{ backgroundColor: 'rgb(220, 20, 60)' }}
           >
-            <MdKeyboardArrowLeft size='25px' /> Cancel
+            <MdKeyboardArrowLeft size='25px' /> Back
           </button>
         </Link>
         <div className='pt-2 mx-auto text-2xl'>New Workout</div>
@@ -132,6 +132,7 @@ function CreateWorkout(props) {
             <div className='font-bold'>Duration</div>
             <input
               type='number'
+              min='1'
               className='w-full input indent-1'
               onChange={(e) => setDuration(e.target.value)}
               placeholder='Length in Minutes'

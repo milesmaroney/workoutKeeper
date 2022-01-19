@@ -186,7 +186,7 @@ function WorkoutDetail(props) {
           className='rounded px-2 py-1 md:py-0 font-semibold'
           style={{ backgroundColor: 'rgb(220, 20, 60)' }}
         >
-          Edit Workout
+          {toggleEdit ? 'Finish Editing' : 'Edit Workout'}
         </button>
         <Link to='..'>
           <button
