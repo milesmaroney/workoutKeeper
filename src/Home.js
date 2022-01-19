@@ -6,7 +6,6 @@ import Main from './Main';
 import { Route, Routes } from 'react-router-dom';
 import CreateWorkout from './CreateWorkout';
 import WorkoutDetail from './WorkoutDetail';
-import sampleWorkouts from './sampleWorkouts';
 
 function Home(props) {
   const [workouts, setWorkouts] = React.useState(props.user?.workouts);

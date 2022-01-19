@@ -6,7 +6,16 @@ function LeftBar(props) {
   const [filter, setFilter] = React.useState('');
   const [hide, setHide] = React.useState(false);
 
-  function compare(a, b) {
+  function compareName(a, b) {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  }
+  function compareCategory(a, b) {
     if (a.category.toLowerCase() < b.category.toLowerCase()) {
       return -1;
     }
@@ -17,7 +26,8 @@ function LeftBar(props) {
   }
 
   const exerciseList = props.exercises
-    .sort(compare)
+    .sort(compareName)
+    .sort(compareCategory)
     .filter((x) => x.category.includes(filter))
     .map((exercise) => (
       <Exercise
@@ -29,7 +39,7 @@ function LeftBar(props) {
     ));
 
   const exerciseCategories = [
-    ...new Set(props.exercises.sort(compare).map((x) => x.category)),
+    ...new Set(props.exercises.sort(compareCategory).map((x) => x.category)),
   ];
 
   const exerciseOptions = [

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BsArrowBarLeft, BsArrowBarRight } from 'react-icons/bs';
+import { IoIosMenu } from 'react-icons/io';
 import useClickOutside from './useClickOutside';
 
 function Header(props) {
@@ -14,14 +14,10 @@ function Header(props) {
   return (
     <div className='flex pr-8 py-2 items-center bg-neutral-900'>
       <div
-        className='pl-2 cursor-pointer'
+        className='pl-2 cursor-pointer text-neutral-400 animate-pulse'
         onClick={() => props.setHide((x) => !x)}
       >
-        {props.hide ? (
-          <BsArrowBarRight size='30px' />
-        ) : (
-          <BsArrowBarLeft size='30px' />
-        )}
+        <IoIosMenu size='30px' />
       </div>
       <div
         className={`relative ml-auto text-sm cursor-pointer font-semibold transition-all duration-300 ${

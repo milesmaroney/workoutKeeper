@@ -8,7 +8,7 @@ import CreateWorkoutExercise from './CreateWorkoutExercise';
 function CreateWorkout(props) {
   const [name, setName] = React.useState('');
   const [difficulty, setDifficulty] = React.useState('Intermediate');
-  const [duration, setDuration] = React.useState('');
+  const [duration, setDuration] = React.useState();
   const [exercises, setExercises] = React.useState([]);
 
   const exerciseNames = props.exercises.map((x) => x.name);
@@ -77,12 +77,14 @@ function CreateWorkout(props) {
       })
       .then((res) => {
         props.refreshUser();
-        //whatever else
       });
   }
 
   return (
-    <div className='h-screen flex flex-col' onClick={props.drawerClick}>
+    <div
+      className='h-screen flex flex-col overflow-y-scroll'
+      onClick={props.drawerClick}
+    >
       <div className='flex h-16 relative'>
         <Link to='..'>
           <button
@@ -129,6 +131,7 @@ function CreateWorkout(props) {
           <div className='flex flex-col w-1/3'>
             <div className='font-bold'>Duration</div>
             <input
+              type='number'
               className='w-full input indent-1'
               onChange={(e) => setDuration(e.target.value)}
               placeholder='Length in Minutes'
@@ -161,7 +164,7 @@ function CreateWorkout(props) {
             <div className='font-bold'>
               {props.exercises[exerciseNames.indexOf(newExerciseName)].type ===
               'Rep Count'
-                ? 'Reps'
+                ? 'Reps / Sets'
                 : 'Time in Seconds'}
             </div>
             <input
@@ -204,7 +207,7 @@ function CreateWorkout(props) {
           ))}
         </div>
       </div>
-      <Link to='..'>
+      <Link to='..' className='mt-auto sticky bottom-0'>
         <button
           className='align-middle w-full font-semibold py-2 mt-auto sticky bottom-0 border-l border-neutral-600 disabled:opacity-50 disabled:cursor-not-allowed'
           onClick={handleSubmit}

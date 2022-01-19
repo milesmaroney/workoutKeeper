@@ -1,5 +1,4 @@
 import Workout from './Workout';
-import sampleWorkouts from './sampleWorkouts';
 import React from 'react';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { Link } from 'react-router-dom';
@@ -59,7 +58,7 @@ function Main(props) {
     ));
 
   return (
-    <div className='h-screen' onClick={props.drawerClick}>
+    <div className='h-screen overflow-y-scroll' onClick={props.drawerClick}>
       <div className='flex justify-center items-center h-16 gap-3 md:gap-4 text-xs md:text-base'>
         <button
           onClick={() => setFavorites((x) => !x)}

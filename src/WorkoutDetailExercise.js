@@ -26,7 +26,7 @@ function WorkoutDetailExercise(props) {
 
   return (
     <div
-      className='flex text-lg md:text-2xl border-b border-neutral-500 py-1 px-4 items-center'
+      className='flex text-lg md:text-2xl border-b border-neutral-500 py-2 px-4 items-center'
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
