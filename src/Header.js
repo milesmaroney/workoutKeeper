@@ -12,13 +12,14 @@ function Header(props) {
   useClickOutside(logout, () => setShowLogout(false));
 
   return (
-    <div className='flex pr-8 py-2 items-center bg-neutral-900'>
+    <div className='flex py-2 px-4 items-center bg-neutral-900'>
       <div
-        className='pl-2 cursor-pointer text-neutral-400 animate-pulse'
+        className='cursor-pointer text-neutral-400'
         onClick={() => props.setHide((x) => !x)}
       >
         <IoIosMenu size='30px' />
       </div>
+      <div className='pl-4'>workoutKeeper</div>
       <div
         className={`relative ml-auto text-sm cursor-pointer font-semibold transition-all duration-300 ${
           props.hide ? '' : 'hidden md:flex'

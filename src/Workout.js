@@ -19,7 +19,7 @@ function Workout(props) {
             backgroundColor: props.workout.favorite ? 'rgb(240, 40, 60)' : '',
           }}
         ></div>
-        <div className='text-white'>{props.workout.name}</div>
+        <div className='text-white font-bold'>{props.workout.name}</div>
         <div className='pl-4 mr-auto text-sm'>{props.workout.category}</div>
         {props.workout.favorite && (
           <div className='pr-2'>
