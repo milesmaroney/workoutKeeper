@@ -24,8 +24,14 @@ function Home(props) {
     axios
       .get(`http://localhost:3001/api/${props.user.username}`)
       .then(({ data }) => {
-        setWorkouts(data.workouts);
+        props.setUser({
+          _id: data._id,
+          username: data.username,
+          exercises: data.exercises,
+          workouts: data.workouts,
+        });
         setExercises(data.exercises);
+        setWorkouts(data.workouts);
       })
       .catch((err) => console.error(err));
   }

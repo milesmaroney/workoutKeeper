@@ -3,7 +3,7 @@ import React from 'react';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
-import WorkoutExercise from './WorkoutExercise';
+import CreateWorkoutExercise from './CreateWorkoutExercise';
 
 function CreateWorkout(props) {
   const [name, setName] = React.useState('');
@@ -28,19 +28,16 @@ function CreateWorkout(props) {
     return 0;
   }
 
-  const categoryNames = props.workouts
-    .sort(compare)
-    .map((workout) => workout.category);
+  const categoryNames = [
+    ...new Set(props.workouts.sort(compare).map((workout) => workout.category)),
+  ];
 
   const categories = [
-    ...props.workouts
-      .sort(compare)
-      .map((workout) => workout.category)
-      .map((option, i) => (
-        <option key={i} value={option}>
-          {option}
-        </option>
-      )),
+    ...categoryNames.map((option, i) => (
+      <option key={i} value={option}>
+        {option}
+      </option>
+    )),
     <option key={'AddNew'} value='addNew'>
       Add New
     </option>,
@@ -197,7 +194,7 @@ function CreateWorkout(props) {
         {!exercises.length && <div className='pt-2'>No Exercises Yet...</div>}
         <div className='pt-2'>
           {exercises.map((exercise, i) => (
-            <WorkoutExercise
+            <CreateWorkoutExercise
               key={uuid()}
               exercise={exercise}
               index={i}
@@ -207,21 +204,23 @@ function CreateWorkout(props) {
           ))}
         </div>
       </div>
-      <button
-        className='align-middle w-full font-semibold py-2 mt-auto sticky bottom-0 border-l border-neutral-600 disabled:opacity-50 disabled:cursor-not-allowed'
-        onClick={handleSubmit}
-        disabled={
-          !exercises.length ||
-          !name ||
-          !duration ||
-          (category === 'addNew' && !newCategory)
-        }
-        style={{
-          backgroundColor: 'rgb(220, 20, 60)',
-        }}
-      >
-        Submit
-      </button>
+      <Link to='..'>
+        <button
+          className='align-middle w-full font-semibold py-2 mt-auto sticky bottom-0 border-l border-neutral-600 disabled:opacity-50 disabled:cursor-not-allowed'
+          onClick={handleSubmit}
+          disabled={
+            !exercises.length ||
+            !name ||
+            !duration ||
+            (category === 'addNew' && !newCategory)
+          }
+          style={{
+            backgroundColor: 'rgb(220, 20, 60)',
+          }}
+        >
+          Submit
+        </button>
+      </Link>
     </div>
   );
 }

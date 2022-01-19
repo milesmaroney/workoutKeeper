@@ -29,7 +29,7 @@ function Header(props) {
         }`}
         onClick={() => setShowLogout((x) => !x)}
       >
-        <div className='hover:text-rose-600'>
+        <div className='hover:text-rose-600 transition-all duration-300'>
           {greetings[Math.floor(Math.random() * greetings.length)]},{' '}
           {props.user.username}
         </div>
