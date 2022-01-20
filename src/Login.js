@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 import Logo from './assets/workoutKeeper.png';
-import config from './config';
 
 function Login(props) {
   const [username, setUsername] = React.useState('');
@@ -28,7 +27,7 @@ function Login(props) {
       return;
     }
     axios
-      .get(`${config.server}/api/login/${username}/${password}`)
+      .get(`${process.env.REACT_APP_server}/api/login/${username}/${password}`)
       .then((res) => {
         if (res.data.username) {
           props.setUser(res.data);
@@ -65,7 +64,7 @@ function Login(props) {
     }
     if (newPassword === confirmNewPassword) {
       axios
-        .post(`${config.server}/api/signup`, {
+        .post(`${process.env.REACT_APP_server}/api/signup`, {
           username: newUsername,
           password: newPassword,
         })

@@ -3,7 +3,6 @@ import React from 'react';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
-import config from './config';
 import CreateWorkoutExercise from './CreateWorkoutExercise';
 
 function CreateWorkout(props) {
@@ -78,12 +77,15 @@ function CreateWorkout(props) {
 
   function handleSubmit() {
     axios
-      .post(`${config.server}/api/${props.user.username}/createWorkout`, {
-        name,
-        exercises,
-        duration,
-        category: category === 'addNew' ? newCategory : category,
-      })
+      .post(
+        `${process.env.REACT_APP_server}/api/${props.user.username}/createWorkout`,
+        {
+          name,
+          exercises,
+          duration,
+          category: category === 'addNew' ? newCategory : category,
+        }
+      )
       .then((res) => {
         props.refreshUser();
       });

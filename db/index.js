@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 const defaultExercises = require('./defaultExercises');
-const Options = require('./config.js');
 const defaultWorkouts = require('./defaultWorkouts');
+require('dotenv').config();
 
-mongoose.connect(Options.mongoURI, (err) => {
+mongoose.connect(process.env.REACT_APP_mongoURI, (err) => {
   if (err) {
     throw err;
   }

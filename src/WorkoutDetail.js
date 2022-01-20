@@ -6,7 +6,6 @@ import {
   MdKeyboardArrowLeft,
 } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
-import config from './config';
 import WorkoutDetailExercise from './WorkoutDetailExercise';
 
 function WorkoutDetail(props) {
@@ -106,14 +105,17 @@ function WorkoutDetail(props) {
 
   function updateWorkout() {
     axios
-      .put(`${config.server}/api/${props.user.username}/updateWorkout`, {
-        _id: workout._id,
-        name: name,
-        favorite: favorite,
-        duration: duration,
-        category: category,
-        exercises: workoutExercises,
-      })
+      .put(
+        `${process.env.REACT_APP_server}/api/${props.user.username}/updateWorkout`,
+        {
+          _id: workout._id,
+          name: name,
+          favorite: favorite,
+          duration: duration,
+          category: category,
+          exercises: workoutExercises,
+        }
+      )
       .then((result) => props.refreshUser())
       .catch((err) => console.error(err));
   }
@@ -121,7 +123,7 @@ function WorkoutDetail(props) {
   function handleFavorite() {
     axios
       .put(
-        `${config.server}/api/${props.user.username}/updateWorkoutFavorite`,
+        `${process.env.REACT_APP_server}/api/${props.user.username}/updateWorkoutFavorite`,
         {
           _id: workout._id,
           favorite: !workout.favorite,
@@ -135,11 +137,14 @@ function WorkoutDetail(props) {
 
   function handleDelete() {
     axios
-      .delete(`${config.server}/api/${props.user.username}/deleteWorkout`, {
-        data: {
-          _id: workout._id,
-        },
-      })
+      .delete(
+        `${process.env.REACT_APP_server}/api/${props.user.username}/deleteWorkout`,
+        {
+          data: {
+            _id: workout._id,
+          },
+        }
+      )
       .then((res) => {
         props.refreshUser();
       })

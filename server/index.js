@@ -5,8 +5,9 @@ const morgan = require('morgan');
 const db = require('../db');
 const bcrypt = require('bcrypt');
 const path = require('path');
+require('dotenv').config();
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.REACT_APP_PORT || 3001;
 
 app.use(cors());
 app.use(morgan('dev'));
