@@ -80,9 +80,9 @@ function CreateWorkout(props) {
       .post(
         `${process.env.REACT_APP_server}/api/${props.user.username}/createWorkout`,
         {
-          name,
+          name: name.trim(),
           exercises,
-          duration,
+          duration: duration.trim(),
           category: category === 'addNew' ? newCategory : category,
         }
       )

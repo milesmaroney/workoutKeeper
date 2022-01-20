@@ -13,13 +13,13 @@ function WorkoutDetail(props) {
     props.workouts[
       props.workouts.map((x) => x.name).indexOf(useParams().workout)
     ];
-  const [name, setName] = React.useState(workout.name);
+  const [name, setName] = React.useState(workout?.name);
   const [workoutExercises, setWorkoutExercises] = React.useState(
-    workout.exercises
+    workout?.exercises
   );
-  const [favorite, setFavorite] = React.useState(workout.favorite);
-  const [duration, setDuration] = React.useState(workout.duration);
-  const [category, setCategory] = React.useState(workout.category);
+  const [favorite, setFavorite] = React.useState(workout?.favorite);
+  const [duration, setDuration] = React.useState(workout?.duration);
+  const [category, setCategory] = React.useState(workout?.category);
   const [toggleEdit, setToggleEdit] = React.useState(false);
 
   const [newExerciseName, setNewExerciseName] = React.useState(
