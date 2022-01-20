@@ -12,7 +12,7 @@ function Home(props) {
   const [exercises, setExercises] = React.useState(props.user?.exercises);
 
   const [hide, setHide] = React.useState(
-    window.screen.width >= 400 ? false : true
+    window.screen.width >= 500 ? false : true
   );
 
   React.useEffect(() => {
@@ -36,7 +36,7 @@ function Home(props) {
   }
 
   function drawerClick() {
-    if (!hide && window.screen.width <= 400) {
+    if (!hide && window.screen.width <= 500) {
       setHide((x) => !x);
     }
   }
