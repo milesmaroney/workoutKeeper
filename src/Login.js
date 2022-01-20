@@ -88,7 +88,7 @@ function Login(props) {
 
   return (
     <div className='h-screen w-screen bg-neutral-800 text-white'>
-      <div className='mx-auto py-12 w-2/3 relative'>
+      <div className='mx-auto py-12 w-2/3 relative flex justify-center'>
         <img src={Logo} alt='workoutKeeper' />
         <div
           className='absolute bottom-0 left-1/2 -translate-x-1/2 text-sm md:text-base border border-red-600 text-red-600 font-bold px-4 py-2 min-w-fit rounded transition-all duration-300'
