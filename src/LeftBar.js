@@ -49,37 +49,27 @@ function LeftBar(props) {
     ...exerciseCategories.map((option, i) => <option key={i}>{option}</option>),
   ];
 
-  const [showAdd, setShowAdd] = React.useState(false);
-
   return (
     <div
-      className='flex-col w-full h-screen bg-neutral-700 border-r relative overflow-y-scroll'
+      className='flex-col w-full h-screen pb-6 bg-neutral-700 border-r overflow-y-scroll'
       style={{
         borderColor: 'rgb(220, 20, 60)',
         display: hide ? 'none' : 'flex',
       }}
     >
-      <select
-        className='rounded input m-2'
-        onChange={(e) => setFilter(e.target.value)}
+      <div
+        className='sticky top-0 bg-neutral-700 flex justify-center border-b'
+        style={{ borderColor: 'rgb(220, 20, 60)' }}
       >
-        {exerciseOptions}
-      </select>
+        <select
+          className='rounded input m-2 w-11/12'
+          onChange={(e) => setFilter(e.target.value)}
+        >
+          {exerciseOptions}
+        </select>
+      </div>
       {exerciseList}
-      <button
-        className='align-middle font-semibold py-2 mt-auto sticky bottom-0'
-        onClick={() => setShowAdd((x) => !x)}
-        style={{ backgroundColor: 'rgb(220, 20, 60)' }}
-      >
-        {showAdd ? 'Cancel' : 'Add New Exercise'}
-      </button>
-      {showAdd && (
-        <AddExercise
-          user={props.user}
-          setShowAdd={setShowAdd}
-          refreshUser={props.refreshUser}
-        />
-      )}
+      <AddExercise user={props.user} refreshUser={props.refreshUser} />
     </div>
   );
 }
