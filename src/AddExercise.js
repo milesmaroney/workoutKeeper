@@ -25,7 +25,7 @@ function AddExercise(props) {
           setType('Rep Count');
           setQuantity('');
           setCategory('Arms');
-          props.setShowAdd(false);
+          setShowAdd(false);
           props.refreshUser();
         })
         .catch((err) => console.error(err));
