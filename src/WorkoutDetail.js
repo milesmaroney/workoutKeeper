@@ -152,7 +152,10 @@ function WorkoutDetail(props) {
   }
 
   return (
-    <div className='h-screen overflow-y-scroll' onClick={props.drawerClick}>
+    <div
+      className='h-screen overflow-y-scroll overflow-x-hidden'
+      onClick={props.drawerClick}
+    >
       <div className='flex relative'>
         <Link to='..'>
           <button

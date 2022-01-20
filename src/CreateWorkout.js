@@ -93,7 +93,7 @@ function CreateWorkout(props) {
 
   return (
     <div
-      className='h-screen flex flex-col overflow-y-scroll'
+      className='h-screen flex flex-col overflow-y-scroll overflow-x-hidden'
       onClick={props.drawerClick}
     >
       <div className='flex h-16 relative'>
