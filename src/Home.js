@@ -42,7 +42,7 @@ function Home(props) {
   }
 
   return (
-    <div className='h-screen min-w-screen flex bg-neutral-800 text-white overflow-x-clip'>
+    <div className='h-screen min-w-screen flex bg-neutral-800 text-white overflow-hidden'>
       <div
         className={`${
           hide ? 'w-0' : 'min-w-[80%] md:min-w-fit w-5/6 md:w-1/3'

@@ -51,7 +51,7 @@ function LeftBar(props) {
 
   return (
     <div
-      className='flex-col w-full h-screen pb-6 bg-neutral-700 border-r overflow-y-scroll'
+      className='flex-col w-full h-screen bg-neutral-700 border-r overflow-y-scroll'
       style={{
         borderColor: 'rgb(220, 20, 60)',
         display: hide ? 'none' : 'flex',
