@@ -185,7 +185,7 @@ app.post('/api/signup', (req, res) => {
 
 // ------- LAUNCH -------
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile('index.html');
 });
 
 app.listen(PORT, (err) => {
