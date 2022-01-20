@@ -64,7 +64,7 @@ function CreateWorkout(props) {
       ...x,
       {
         ...props.exercises[exerciseNames.indexOf(newExerciseName)],
-        quantity: newExerciseQuantity,
+        quantity: newExerciseQuantity.trim(),
       },
     ]);
     setNewExerciseQuantity('');
@@ -83,7 +83,8 @@ function CreateWorkout(props) {
           name: name.trim(),
           exercises,
           duration: duration.trim(),
-          category: category === 'addNew' ? newCategory : category,
+          category:
+            category === 'addNew' ? newCategory.trim() : category.trim(),
         }
       )
       .then((res) => {
