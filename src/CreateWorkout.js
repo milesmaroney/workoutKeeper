@@ -48,7 +48,7 @@ function CreateWorkout(props) {
       </option>
     )),
     <option key={'AddNew'} value='addNew'>
-      Add New
+      + Add New
     </option>,
   ];
 
@@ -82,7 +82,7 @@ function CreateWorkout(props) {
         {
           name: name.trim(),
           exercises,
-          duration: duration.trim(),
+          duration: duration,
           category:
             category === 'addNew' ? newCategory.trim() : category.trim(),
         }

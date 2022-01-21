@@ -22,6 +22,18 @@ app.get('/api/:username', (req, res) => {
     .catch((err) => res.status(400).send(err));
 });
 
+app.get('/api/:username/:workout', (req, res) => {
+  db.User.findOne(
+    {
+      username: req.params.username,
+      'workouts.name': req.params.workout,
+    },
+    'username workouts.$'
+  )
+    .then((data) => res.status(200).send(data))
+    .catch((err) => res.status(400).send(err));
+});
+
 // ------- ADD CONTENT TO USER -------
 app.post('/api/:username/createExercise', (req, res) => {
   db.User.findOneAndUpdate(
@@ -184,7 +196,7 @@ app.post('/api/signup', (req, res) => {
 });
 
 // ------- LAUNCH -------
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });
 

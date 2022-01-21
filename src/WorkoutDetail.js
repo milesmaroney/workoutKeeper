@@ -61,7 +61,7 @@ function WorkoutDetail(props) {
       </option>
     )),
     <option key={'AddNew'} value='addNew'>
-      Add New
+      + Add New
     </option>,
   ];
 

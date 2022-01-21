@@ -22,6 +22,7 @@ const exerciseSchema = new mongoose.Schema({
 const workoutSchema = new mongoose.Schema({
   name: String,
   favorite: { type: Boolean, default: false },
+  share: { type: Boolean, default: false },
   category: String,
   duration: Number,
   exercises: [exerciseSchema],

@@ -2,6 +2,7 @@ const defaultWorkouts = [
   {
     name: 'Example Workout 1',
     favorite: false,
+    public: false,
     category: 'Back & Biceps',
     duration: 45,
     exercises: [
@@ -52,6 +53,7 @@ const defaultWorkouts = [
   {
     name: 'Example Favorite Workout',
     favorite: true,
+    public: true,
     category: 'Lower Body',
     duration: 90,
     exercises: [

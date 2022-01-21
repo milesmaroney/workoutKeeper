@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
+import Share from './Share';
 
 function App(props) {
   const [user, setUser] = React.useState(
@@ -35,6 +36,7 @@ function App(props) {
           )
         }
       />
+      <Route path='/share/:user/:workout' element={<Share />} />
     </Routes>
   );
 }
