@@ -6,9 +6,12 @@ import { v4 as uuid } from 'uuid';
 import CreateWorkoutExercise from './CreateWorkoutExercise';
 
 function CreateWorkout(props) {
-  const [name, setName] = React.useState('');
-  const [duration, setDuration] = React.useState(60);
-  const [exercises, setExercises] = React.useState([]);
+  const [name, setName] = React.useState(
+    () => JSON.parse(localStorage.getItem('workoutInProgress')).name || ''
+  );
+  const [exercises, setExercises] = React.useState(
+    () => JSON.parse(localStorage.getItem('workoutInProgress')).exercises || []
+  );
 
   const exerciseNames = props.exercises.map((x) => x.name);
 
@@ -19,7 +22,7 @@ function CreateWorkout(props) {
 
   React.useEffect(() => {
     document.title = 'Create a Workout';
-  });
+  }, []);
 
   function compare(a, b) {
     if (a.category.toLowerCase() < b.category.toLowerCase()) {
@@ -60,8 +63,28 @@ function CreateWorkout(props) {
     .sort(compareName)
     .map((x) => <option key={x._id}>{x.name}</option>);
 
-  const [category, setCategory] = React.useState(categoryNames[0] || 'addNew');
-  const [newCategory, setNewCategory] = React.useState('');
+  const [category, setCategory] = React.useState(
+    () =>
+      JSON.parse(localStorage.getItem('workoutInProgress')).category ||
+      categoryNames[0] ||
+      'addNew'
+  );
+  const [newCategory, setNewCategory] = React.useState(
+    () =>
+      JSON.parse(localStorage.getItem('workoutInProgress')).newCategory || ''
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem(
+      'workoutInProgress',
+      JSON.stringify({
+        name: name.trim(),
+        exercises,
+        category: category.trim(),
+        newCategory: newCategory.trim(),
+      })
+    );
+  }, [name, exercises, category, newCategory]);
 
   function handleAdd() {
     setExercises((x) => [
@@ -75,8 +98,16 @@ function CreateWorkout(props) {
   }
 
   function handleClear() {
-    setNewExerciseName(props.exercises[0]?.name);
-    setNewExerciseQuantity('');
+    if (
+      window.confirm("Are you sure? This will reset what you've done so far")
+    ) {
+      setNewExerciseName(props.exercises[0]?.name);
+      setNewExerciseQuantity('');
+      setName('');
+      setExercises([]);
+      setCategory(categoryNames[0] || 'addNew');
+      setNewCategory('');
+    }
   }
 
   function handleSubmit() {
@@ -86,7 +117,6 @@ function CreateWorkout(props) {
         {
           name: name.trim(),
           exercises,
-          duration,
           category:
             category === 'addNew' ? newCategory.trim() : category.trim(),
         }
@@ -102,19 +132,14 @@ function CreateWorkout(props) {
       onClick={props.drawerClick}
     >
       <div className='flex h-16 relative'>
-        <Link to='..'>
-          <button
-            className='flex items-center rounded md:py-1 pr-3 absolute top-3 md:top-2 left-2 font-bold text-xl'
-            style={{ backgroundColor: 'rgb(220, 20, 60)' }}
-          >
-            <MdKeyboardArrowLeft size='25px' /> Back
-          </button>
+        <Link to='..' className='absolute top-3 left-2'>
+          <MdKeyboardArrowLeft size='25px' />
         </Link>
-        <div className='pt-2 mx-auto text-2xl'>New Workout</div>
+        <div className='pt-2 mx-auto text-2xl'>Create Workout</div>
       </div>
       <div className='flex flex-col px-2 md:px-8 text-sm md:text-base'>
-        <div className='flex w-full justify-between gap-4 pt-2'>
-          <div className='flex flex-col w-1/3'>
+        <div className='flex w-full justify-between gap-2 md:gap-4 pt-2'>
+          <div className='flex flex-col w-1/2'>
             <div className='font-bold'>Workout Name</div>
             <input
               className='w-full input indent-1'
@@ -122,7 +147,7 @@ function CreateWorkout(props) {
               value={name}
             />
           </div>
-          <div className='flex flex-col w-1/3'>
+          <div className='flex flex-col w-1/2'>
             <div className='font-bold'>Category</div>
             <select
               className='w-full min-w-fit input indent-1'
@@ -131,17 +156,6 @@ function CreateWorkout(props) {
             >
               {categories}
             </select>
-          </div>
-          <div className='flex flex-col w-1/3'>
-            <div className='font-bold'>Duration</div>
-            <input
-              type='number'
-              min='1'
-              className='w-full input indent-1'
-              onChange={(e) => setDuration(e.target.value)}
-              placeholder='Length in Minutes'
-              value={duration}
-            />
           </div>
         </div>
         {category === 'addNew' && (
@@ -152,7 +166,7 @@ function CreateWorkout(props) {
             value={newCategory}
           />
         )}
-        <div className='flex gap-4 pt-2 pb-8 justify-between items-center'>
+        <div className='flex gap-2 md:gap-4 pt-2 pb-8 justify-between items-center'>
           <div className='flex flex-col w-1/3'>
             <div className='font-bold'>Add Exercise</div>
             <select
@@ -194,8 +208,9 @@ function CreateWorkout(props) {
               className='rounded-r px-1 md:px-2 w-2/5 md:w-1/3'
               style={{ backgroundColor: 'rgb(110, 15, 30)' }}
               onClick={handleClear}
+              disabled={!name && !exercises.length}
             >
-              Clear
+              Reset
             </button>
           </div>
         </div>
@@ -219,14 +234,13 @@ function CreateWorkout(props) {
           disabled={
             !exercises.length ||
             !name ||
-            duration < 1 ||
             (category === 'addNew' && !newCategory)
           }
           style={{
             backgroundColor: 'rgb(220, 20, 60)',
           }}
         >
-          Submit
+          Create
         </button>
       </Link>
     </div>

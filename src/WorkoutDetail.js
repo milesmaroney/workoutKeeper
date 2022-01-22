@@ -80,7 +80,7 @@ function WorkoutDetail(props) {
 
   React.useEffect(() => {
     updateWorkout();
-  }, [workoutExercises]);
+  }, [workoutExercises, category]);
 
   function handleAdd() {
     setWorkoutExercises((x) => [
@@ -199,20 +199,15 @@ function WorkoutDetail(props) {
       onClick={props.drawerClick}
     >
       <div className='flex relative'>
-        <Link to='..'>
-          <button
-            className='flex items-center rounded py-1 pr-3 absolute top-2 left-2 font-bold text-xl'
-            style={{ backgroundColor: 'rgb(220, 20, 60)' }}
-          >
-            <MdKeyboardArrowLeft size='25px' /> Back
-          </button>
+        <Link to='..' className='absolute top-3 left-2'>
+          <MdKeyboardArrowLeft size='25px' />
         </Link>
         <div className='flex items-center pt-3 md:pt-2 mx-auto text-lg md:text-2xl relative'>
           {workout.name}
           <button
             onClick={handleFavorite}
             value={favorite}
-            className='absolute -right-10'
+            className='absolute -right-10 top-3'
             style={{
               color: favorite ? 'rgb(220, 20, 60)' : 'rgb(82, 82, 82)',
             }}
@@ -225,14 +220,27 @@ function WorkoutDetail(props) {
           </button>
         </div>
       </div>
+      <div className='text-center text-sm text-neutral-500'>
+        {toggleEdit ? (
+          <input
+            className='input rounded indent-1 mt-1 text-white'
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+        ) : (
+          workout.category
+        )}
+      </div>
       <div className='flex justify-center items-center h-16 gap-3 md:gap-4 text-xs md:text-base'>
-        <button
-          onClick={() => setToggleEdit((x) => !x)}
-          className='rounded px-2 py-1 md:py-0 font-semibold'
-          style={{ backgroundColor: 'rgb(220, 20, 60)' }}
-        >
-          {toggleEdit ? 'Finish Editing' : 'Edit Workout'}
-        </button>
+        <Link to={`../${name}`}>
+          <button
+            onClick={() => setToggleEdit((x) => !x)}
+            className='rounded px-2 py-1 md:py-0 font-semibold'
+            style={{ backgroundColor: 'rgb(220, 20, 60)' }}
+          >
+            {toggleEdit ? 'Finish Editing' : 'Edit Workout'}
+          </button>
+        </Link>
 
         <button
           onClick={handleShare}
@@ -266,8 +274,8 @@ function WorkoutDetail(props) {
               {share ? 'Set to Private' : 'Set to Public'}
             </button>
           </div>
-          <div className='flex gap-4 pt-2 px-4 pb-8 justify-between items-center text-sm md:text-base'>
-            <div className='flex flex-col w-1/3'>
+          <div className='flex gap-2 md:gap-4 pt-2 px-4 pb-8 justify-between items-center text-sm md:text-base'>
+            <div className='flex flex-col w-2/5'>
               <div className='font-bold'>Add Exercise</div>
               <select
                 className='w-full input indent-1'
@@ -279,7 +287,7 @@ function WorkoutDetail(props) {
                 {exerciseOptions}
               </select>
             </div>
-            <div className='flex flex-col w-1/3'>
+            <div className='flex flex-col w-2/5'>
               <div className='font-bold'>
                 {props.exercises[exerciseNames.indexOf(newExerciseName)]
                   .type === 'Rep Count'
@@ -296,21 +304,14 @@ function WorkoutDetail(props) {
                 value={newExerciseQuantity}
               />
             </div>
-            <div className='flex w-1/3 self-end'>
+            <div className='flex w-1/5 self-end'>
               <button
-                className='rounded-l py-0.5 md:pt-0 px-2 w-3/5 md:w-2/3 font-bold disabled:opacity-70 disabled:cursor-not-allowed'
+                className='rounded py-0.5 md:pt-0 px-2 w-full font-bold disabled:opacity-70 disabled:cursor-not-allowed'
                 style={{ backgroundColor: 'rgb(220, 30, 60)' }}
                 disabled={!newExerciseQuantity || !newExerciseName}
                 onClick={handleAdd}
               >
                 Add
-              </button>
-              <button
-                className='rounded-r px-1 md:px-2 w-2/5 md:w-1/3'
-                style={{ backgroundColor: 'rgb(110, 15, 30)' }}
-                onClick={handleClear}
-              >
-                Clear
               </button>
             </div>
           </div>

@@ -6,6 +6,7 @@ import Main from './Main';
 import { Route, Routes } from 'react-router-dom';
 import CreateWorkout from './CreateWorkout';
 import WorkoutDetail from './WorkoutDetail';
+import { useSwipeable } from 'react-swipeable';
 
 function Home(props) {
   const [workouts, setWorkouts] = React.useState(props.user?.workouts);
@@ -41,8 +42,22 @@ function Home(props) {
     }
   }
 
+  const swipeHandler = useSwipeable({
+    onSwiped: (eventData) => {
+      if (eventData.dir === 'Right') {
+        setHide(false);
+      }
+      if (eventData.dir === 'Left') {
+        setHide(true);
+      }
+    },
+  });
+
   return (
-    <div className='h-screen min-w-screen flex bg-neutral-800 text-white overflow-hidden'>
+    <div
+      {...swipeHandler}
+      className='h-screen min-w-screen flex bg-neutral-800 text-white overflow-hidden'
+    >
       <div
         className={`${
           hide ? 'w-0' : 'min-w-[80%] md:min-w-fit w-5/6 md:w-1/3'

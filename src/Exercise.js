@@ -50,7 +50,7 @@ function Exercise(props) {
   return (
     <div className='flex flex-col border-b border-neutral-500'>
       <div
-        className={`w-full h-8 px-4 flex items-center cursor-pointer transition-all duration-150`}
+        className={`w-full h-8 pl-1 pr-2 md:px-4 flex items-center cursor-pointer transition-all duration-150`}
         style={{ backgroundColor: showEdit || hovered ? 'rgb(30,30,30)' : '' }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -60,12 +60,12 @@ function Exercise(props) {
           {showEdit ? <MdKeyboardArrowDown /> : <MdKeyboardArrowRight />}
         </div>
         <div
-          className={`pl-2 font-semibold transition-all duration-150`}
+          className={`pl-2 font-semibold text-sm md:text-base transition-all duration-150`}
           style={{ color: showEdit || hovered ? 'rgb(220, 20, 60)' : '' }}
         >
           {props.exercise.name}
         </div>
-        <div className='ml-auto text-neutral-500'>
+        <div className='ml-auto text-sm md:text-base text-neutral-500'>
           {props.exercise.category}
         </div>
       </div>
