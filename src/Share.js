@@ -7,6 +7,7 @@ import {
 } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
 import WorkoutDetailExercise from './WorkoutDetailExercise';
+import Logo from './assets/workoutKeeperSmall.png';
 
 function WorkoutDetail(props) {
   const workoutName = useParams().workout;
@@ -40,20 +41,18 @@ function WorkoutDetail(props) {
     axios
       .get(`${process.env.REACT_APP_server}/api/${username}/${workoutName}`)
       .then((result) => {
-        if (result.data.workouts[0].share) {
-          setWorkout(result.data.workouts[0]);
-          setName(result.data.workouts[0].name);
-          setFavorite(result.data.workouts[0].favorite);
-          setShare(result.data.workouts[0].share);
-          setWorkoutExercises(result.data.workouts[0].exercises);
-          setDuration(result.data.workouts[0].duration);
-          setCategory(result.data.workouts[0].category);
-        } else {
-          setForbidden(true);
-        }
+        setWorkout(result.data.workouts[0]);
+        setName(result.data.workouts[0].name);
+        setFavorite(result.data.workouts[0].favorite);
+        setShare(result.data.workouts[0].share);
+        setWorkoutExercises(result.data.workouts[0].exercises);
+        setDuration(result.data.workouts[0].duration);
+        setCategory(result.data.workouts[0].category);
+        document.title = `${workoutName} by ${username} - workoutKeeper`;
       })
       .catch((err) => {
         setForbidden(true);
+        document.title = `Not Found - workoutKeeper`;
       });
   }
 
@@ -67,13 +66,32 @@ function WorkoutDetail(props) {
       {!forbidden && (
         <div className='overflow-y-scroll overflow-x-hidden'>
           <div
-            className='flex flex-col justify-center items-center pb-4 border-b'
+            className='flex flex-col justify-center items-center pt-4 md:pt-0 border-b'
             style={{ borderColor: 'rgb(220, 40, 60)' }}
           >
-            <div className='pt-3 md:pt-2 mx-auto font-bold text-lg md:text-3xl'>
-              {workoutName}
+            <div className='flex flex-col md:flex-row w-full px-8 items-center justify-center'>
+              <div className='flex items-center justify-center md:justify-start md:w-1/3 pb-2 md:pb-0'>
+                <img src={Logo} alt='Logo' className='w-3/4 md:w-1/2' />
+              </div>
+              <div className='flex flex-col items-center md:w-1/3'>
+                <div className='pt-3 md:pt-2 mx-auto font-bold text-2xl md:text-3xl'>
+                  {workoutName}
+                </div>
+                <div className='text-neutral-400 pb-4'>
+                  created by {username}
+                </div>
+              </div>
+              <div className='hidden md:flex md:w-1/3'>
+                <Link to='/' className='ml-auto'>
+                  <button
+                    className='flex items-center rounded py-1 px-3 font-bold text-xl'
+                    style={{ backgroundColor: 'rgb(220, 20, 60)' }}
+                  >
+                    Login
+                  </button>
+                </Link>
+              </div>
             </div>
-            <div className='text-neutral-400'>by {username}</div>
           </div>
 
           {exerciseElements}
