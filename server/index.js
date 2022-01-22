@@ -213,6 +213,10 @@ app.post('/api/signup', (req, res) => {
 });
 
 // ------- LAUNCH -------
+app.get('/wkFavIcon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'build', 'wkFavIcon.ico'));
+});
+
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });
