@@ -163,7 +163,7 @@ function CreateWorkout(props) {
           </div>
           <div className='flex flex-col w-1/3'>
             <div className='font-bold'>
-              {props.exercises[exerciseNames.indexOf(newExerciseName)].type ===
+              {props.exercises[exerciseNames.indexOf(newExerciseName)]?.type ===
               'Rep Count'
                 ? 'Sets x Reps'
                 : 'Time in Seconds'}

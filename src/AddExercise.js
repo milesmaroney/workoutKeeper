@@ -14,9 +14,9 @@ function AddExercise(props) {
         .post(
           `${process.env.REACT_APP_server}/api/${props.user.username}/createExercise`,
           {
-            name,
+            name: name.trim(),
             type,
-            quantity,
+            quantity: quantity.trim(),
             category,
           }
         )

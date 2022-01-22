@@ -167,7 +167,9 @@ function WorkoutDetail(props) {
     setShowCopied(true);
     handleCopy();
     navigator.clipboard.writeText(
-      `${process.env.REACT_APP_server}/share/${props.user.username}/${name}`
+      `${process.env.REACT_APP_server}/share/${
+        props.user.username
+      }/${name.replaceAll(' ', '%20')}`
     );
   }
 
