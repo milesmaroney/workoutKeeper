@@ -123,6 +123,12 @@ function CreateWorkout(props) {
       )
       .then((res) => {
         props.refreshUser();
+        setNewExerciseName(props.exercises[0]?.name);
+        setNewExerciseQuantity('');
+        setName('');
+        setExercises([]);
+        setCategory(categoryNames[0] || 'addNew');
+        setNewCategory('');
       });
   }
 
