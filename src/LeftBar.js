@@ -4,6 +4,7 @@ import Exercise from './Exercise';
 
 function LeftBar(props) {
   const [filter, setFilter] = React.useState('');
+  const [search, setSearch] = React.useState('');
   const [hide, setHide] = React.useState(false);
 
   function compareName(a, b) {
@@ -29,6 +30,7 @@ function LeftBar(props) {
     .sort(compareName)
     .sort(compareCategory)
     .filter((x) => x.category.includes(filter))
+    .filter((x) => x.name.toLowerCase().includes(search.toLowerCase()))
     .map((exercise) => (
       <Exercise
         key={exercise._id}
@@ -58,12 +60,19 @@ function LeftBar(props) {
       }}
     >
       <div
-        className='sticky top-0 bg-neutral-700 flex justify-center border-b'
+        className='sticky top-0 bg-neutral-700 flex justify-center border-b gap-2 p-2'
         style={{ borderColor: 'rgb(220, 20, 60)' }}
       >
+        <input
+          className='rounded input w-1/2 indent-1'
+          onChange={(e) => setSearch(e.target.value)}
+          value={search}
+          placeholder='Search'
+        />
         <select
-          className='rounded input m-2 w-11/12'
+          className='rounded input w-1/2'
           onChange={(e) => setFilter(e.target.value)}
+          value={filter}
         >
           {exerciseOptions}
         </select>
