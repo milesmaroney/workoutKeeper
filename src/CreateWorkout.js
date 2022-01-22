@@ -7,10 +7,10 @@ import CreateWorkoutExercise from './CreateWorkoutExercise';
 
 function CreateWorkout(props) {
   const [name, setName] = React.useState(
-    () => JSON.parse(localStorage.getItem('workoutInProgress')).name || ''
+    () => JSON.parse(localStorage.getItem('workoutInProgress'))?.name || ''
   );
   const [exercises, setExercises] = React.useState(
-    () => JSON.parse(localStorage.getItem('workoutInProgress')).exercises || []
+    () => JSON.parse(localStorage.getItem('workoutInProgress'))?.exercises || []
   );
 
   const exerciseNames = props.exercises.map((x) => x.name);
@@ -65,13 +65,13 @@ function CreateWorkout(props) {
 
   const [category, setCategory] = React.useState(
     () =>
-      JSON.parse(localStorage.getItem('workoutInProgress')).category ||
+      JSON.parse(localStorage.getItem('workoutInProgress'))?.category ||
       categoryNames[0] ||
       'addNew'
   );
   const [newCategory, setNewCategory] = React.useState(
     () =>
-      JSON.parse(localStorage.getItem('workoutInProgress')).newCategory || ''
+      JSON.parse(localStorage.getItem('workoutInProgress'))?.newCategory || ''
   );
 
   React.useEffect(() => {
