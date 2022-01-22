@@ -20,7 +20,7 @@ const exerciseSchema = new mongoose.Schema({
 });
 
 const workoutSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, unique: true },
   favorite: { type: Boolean, default: false },
   share: { type: Boolean, default: false },
   category: String,

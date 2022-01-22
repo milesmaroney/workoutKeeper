@@ -8,6 +8,10 @@ function Main(props) {
   const [category, setCategory] = React.useState('');
   const [favorites, setFavorites] = React.useState(false);
 
+  React.useEffect(() => {
+    document.title = 'workoutKeeper';
+  });
+
   function compareCategory(a, b) {
     if (a.category.toLowerCase() < b.category.toLowerCase()) {
       return -1;
@@ -81,7 +85,7 @@ function Main(props) {
           onChange={(e) => setSearch(e.target.value)}
         />
         <select
-          className='input pl-1 pr-2'
+          className='input w-1/4 pl-1 pr-2'
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >

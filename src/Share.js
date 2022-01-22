@@ -22,6 +22,7 @@ function WorkoutDetail(props) {
   const [share, setShare] = React.useState();
   const [duration, setDuration] = React.useState();
   const [category, setCategory] = React.useState();
+  const [saved, setSaved] = React.useState(false);
 
   React.useEffect(() => {
     loadWorkout();
@@ -56,6 +57,24 @@ function WorkoutDetail(props) {
       });
   }
 
+  function handleSave() {
+    axios
+      .post(
+        `${process.env.REACT_APP_server}/api/${props.user.username}/createWorkout`,
+        {
+          name,
+          exercises: workoutExercises,
+          duration: duration,
+          category,
+        }
+      )
+      .then(() => setSaved(true))
+      .catch((err) => {
+        alert('Could not save workout');
+        console.error(err);
+      });
+  }
+
   return (
     <div className='bg-neutral-800 text-white h-screen w-screen'>
       {forbidden && (
@@ -71,7 +90,9 @@ function WorkoutDetail(props) {
           >
             <div className='flex flex-col md:flex-row w-full px-8 items-center justify-center'>
               <div className='flex items-center justify-center md:justify-start md:w-1/3 pb-2 md:pb-0'>
-                <img src={Logo} alt='Logo' className='w-3/4 md:w-1/2' />
+                <Link to='/' className='w-3/4 md:w-1/2'>
+                  <img src={Logo} alt='Logo' />
+                </Link>
               </div>
               <div className='flex flex-col items-center md:w-1/3'>
                 <div className='pt-3 md:pt-2 mx-auto font-bold text-2xl md:text-3xl'>
@@ -81,15 +102,21 @@ function WorkoutDetail(props) {
                   created by {username}
                 </div>
               </div>
-              <div className='hidden md:flex md:w-1/3'>
-                <Link to='/' className='ml-auto'>
+              <div className='flex md:w-1/3 pb-4 md:pb-0'>
+                {props.user.username && (
                   <button
-                    className='flex items-center rounded py-1 px-3 font-bold text-xl'
-                    style={{ backgroundColor: 'rgb(220, 20, 60)' }}
+                    className='flex md:ml-auto items-center rounded py-1 px-3 font-bold text-sm md:text-xl'
+                    style={{
+                      backgroundColor: saved
+                        ? 'rgb(100, 100, 100)'
+                        : 'rgb(220, 20, 60)',
+                    }}
+                    onClick={handleSave}
+                    disabled={saved}
                   >
-                    Login
+                    {saved ? 'Saved' : 'Save Workout'}
                   </button>
-                </Link>
+                )}
               </div>
             </div>
           </div>

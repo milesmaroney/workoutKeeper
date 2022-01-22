@@ -30,6 +30,10 @@ function WorkoutDetail(props) {
   );
   const [newExerciseQuantity, setNewExerciseQuantity] = React.useState('');
 
+  React.useEffect(() => {
+    document.title = workout.name;
+  }, []);
+
   function compareName(a, b) {
     if (a.name.toLowerCase() < b.name.toLowerCase()) {
       return -1;

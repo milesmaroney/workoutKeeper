@@ -17,6 +17,10 @@ function CreateWorkout(props) {
   );
   const [newExerciseQuantity, setNewExerciseQuantity] = React.useState('');
 
+  React.useEffect(() => {
+    document.title = 'Create a Workout';
+  });
+
   function compare(a, b) {
     if (a.category.toLowerCase() < b.category.toLowerCase()) {
       return -1;
@@ -82,7 +86,7 @@ function CreateWorkout(props) {
         {
           name: name.trim(),
           exercises,
-          duration: duration,
+          duration,
           category:
             category === 'addNew' ? newCategory.trim() : category.trim(),
         }

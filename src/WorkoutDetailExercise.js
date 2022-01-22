@@ -25,12 +25,14 @@ function WorkoutDetailExercise(props) {
 
   return (
     <div
-      className='flex text-lg md:text-2xl border-b border-neutral-500 py-2 px-4 items-center'
+      className='flex md:text-2xl border-b border-neutral-500 py-2 px-2 md:px-4 items-center h-16'
       // onMouseEnter={() => setHover(true)}
       // onMouseLeave={() => setHover(false)}
     >
       <div className='w-2/5'>{props.exercise.name}</div>
-      <div className={`ml-${props.toggleEdit ? '4' : 'auto'}`}>
+      <div
+        className={`ml-${props.toggleEdit ? '4' : 'auto'} text-sm md:text-base`}
+      >
         {props.exercise.type === 'Rep Count'
           ? `${props.exercise.quantity} Reps`
           : `${props.exercise.quantity}s`}

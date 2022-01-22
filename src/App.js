@@ -36,7 +36,7 @@ function App(props) {
           )
         }
       />
-      <Route path='/share/:user/:workout' element={<Share />} />
+      <Route path='/share/:user/:workout' element={<Share user={user} />} />
     </Routes>
   );
 }
